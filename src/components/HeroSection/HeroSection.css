@@ -1,0 +1,126 @@
+.slider-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: 300px;
+  max-height: 300px;
+}
+
+.slider-left {
+  flex: 7;
+  position: relative;
+  height: 100%;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.slides {
+  display: flex;
+  height: 100%;
+}
+
+.slides img {
+  width: 100%;
+  flex-shrink: 0;
+  height: 100%;
+  object-fit: cover;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(6px);
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.arrow.left {
+  left: 15px;
+}
+.arrow.right {
+  right: 15px;
+}
+.slider:hover .arrow {
+  opacity: 1;
+}
+
+.dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #dbdbdb;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dot.active {
+  background: #333;
+}
+
+.slider-right {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.promo-card {
+  display: flex;
+  height: 50%;
+  overflow: hidden;
+  background-color: #19a260;
+}
+
+.promo-text,
+.promo-text2 {
+  width: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.promo-text {
+  background-color: #19a260;
+  color: white !important;
+}
+
+.promo-text2 {
+  background-color: #f4f3ef;
+    color: #012900;
+}
+
+.promo-text h3,
+.promo-text2 h3 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.promo-img {
+  width: 35%;
+  height: 100%;
+}
+
+.promo-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,66 @@
+.main-bg {
+  background-color: #f5f3ef;
+  padding: 18px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.more-product-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 22px;
+  margin-bottom: 22px;
+  justify-content: center;
+}
+.sale-product-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  margin-bottom: 22px;
+  justify-content: center;
+}
+
+.main-layout {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 90%;
+  margin: auto;
+  margin-top: 15px;
+  transition: max-width 300ms ease-in-out, margin 300ms ease-in-out;
+}
+
+.main-layout.shrink-layout {
+  padding-right: 250px;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+@media (max-width: 1800px) {
+.main-layout {
+  max-width: 93%;
+}
+}
+@media (max-width: 1550px) {
+.main-layout {
+  max-width: 95%;
+}
+}
+@media (min-width: 1950px) and (max-width: 2400px) {
+.main-layout {
+  max-width: 95%;
+}
+}
+@media (min-width: 2401px) and (max-width: 3000px) {
+.main-layout {
+  max-width: 95%;
+}
+}

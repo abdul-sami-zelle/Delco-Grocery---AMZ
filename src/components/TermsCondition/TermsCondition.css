@@ -1,0 +1,84 @@
+.checkout-header {
+  height: 270px;
+  background: url("/assets/Images/header-bg.jpg") center center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.page-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.7;
+}
+
+.page-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #1e3a34;
+  text-align: center;
+  font-weight: 700;
+  border-bottom: 3px solid #1e3a34;
+  padding-bottom: 10px;
+}
+
+.page-container h2 {
+  font-size: 1.5rem;
+  margin-top: 30px;
+  margin-bottom: 12px;
+  color: #2c5f4a;
+  font-weight: 600;
+}
+
+.page-container p {
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+}
+
+.page-container ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.page-container ul li {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+  list-style-type: disc;
+}
+
+.page-container a {
+  color: #006d5b;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.page-container a:hover {
+  text-decoration: underline;
+  color: #004d3f;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 20px;
+    margin: 0 auto;
+  }
+
+  .page-container h1 {
+    font-size: 2rem;
+  }
+
+  .page-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .page-container p,
+  .page-container ul li {
+    font-size: 1rem;
+  }
+}

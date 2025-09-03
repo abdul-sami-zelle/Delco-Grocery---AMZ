@@ -1,0 +1,85 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeBg 0.3s ease;
+}
+
+.popup-modal {
+  background: linear-gradient(145deg, #ffffff, #f8f8f8);
+  border-radius: 16px;
+  padding: 28px 24px;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  animation: popIn 0.35s ease;
+}
+
+.popup-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d9534f;
+  font-size: 32px;
+}
+
+.popup-modal h3 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #d9534f;
+}
+
+.popup-modal p {
+  font-size: 18px;
+  margin-bottom: 22px;
+  color: #444;
+  line-height: 1.4;
+}
+
+.popup-btn {
+  background: linear-gradient(135deg, #ff5f6d, #d9534f);
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(217,83,79,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.popup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(217,83,79,0.5);
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeBg {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
