@@ -7,10 +7,10 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 
 const HeroSection = () => {
   const slides = [
-    "/assets/Images/slider1.jpg",
-    "/assets/Images/slider2.gif",
-    "/assets/Images/slider3.jpg",
-    "/assets/Images/slider4.jpg",
+    "/assets/Images/1.jpg",
+    "/assets/Images/2.jpg",
+    "/assets/Images/3.jpg",
+    "/assets/Images/4.jpg",
   ];
 
   const [index, setIndex] = useState(1);
@@ -43,6 +43,25 @@ const HeroSection = () => {
       setIndex(slides.length);
     }
   };
+
+  useEffect(() => {
+    if (index >= extendedSlides.length) {
+      setIndex(1);
+      setTransition(false);
+    }
+    if (index < 0) {
+      setIndex(slides.length);
+      setTransition(false);
+    }
+  }, [index, extendedSlides.length, slides.length]);
+
+  // Preload images
+  useEffect(() => {
+    slides.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   useEffect(() => {
     if (!transition) {
@@ -89,7 +108,11 @@ const HeroSection = () => {
         <div className="promo-card">
           <div className="promo-text">
             <h3>
-              Taste What's <br /> in Season <MdKeyboardArrowRight />
+              Taste What's <br />{" "}
+              <span style={{ display: "flex", alignItems: "center" }}>
+                {" "}
+                in Season <MdKeyboardArrowRight />
+              </span>
             </h3>
           </div>
           <div className="promo-img">
@@ -99,7 +122,11 @@ const HeroSection = () => {
         <div className="promo-card">
           <div className="promo-text2">
             <h3>
-              Take a snack <br /> and sip break <MdKeyboardArrowRight />
+              Take a snack <br />{" "}
+              <span style={{ display: "flex", alignItems: "center" }}>
+                {" "}
+                and sip break <MdKeyboardArrowRight />{" "}
+              </span>
             </h3>
           </div>
           <div className="promo-img">

@@ -23,10 +23,10 @@ export default function Header() {
   const [activeModal, setActiveModal] = useState(null);
 
   const slides = [
-    "/assets/Images/slider1.jpg",
-    "/assets/Images/slider2.gif",
-    "/assets/Images/slider3.jpg",
-    "/assets/Images/slider4.jpg",
+    "/assets/Images/1.jpg",
+    "/assets/Images/2.jpg",
+    "/assets/Images/3.jpg",
+    "/assets/Images/4.jpg",
   ];
 
   const categories = [

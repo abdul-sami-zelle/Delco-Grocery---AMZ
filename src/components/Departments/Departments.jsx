@@ -2,6 +2,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { getLandingPageData } from "../../lib/api";
+import { useRouter } from "next/navigation";
 import "./Departments.css";
 
 const Departments = () => {
@@ -10,6 +11,7 @@ const Departments = () => {
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isOverflowing, setIsOverflowing] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchData() {
@@ -22,7 +24,6 @@ const Departments = () => {
     }
     fetchData();
   }, []);
-
 
   useEffect(() => {
     const checkOverflow = () => {
@@ -69,7 +70,11 @@ const Departments = () => {
               </div>
             ))
           : departments.map((dept) => (
-              <div className="department-cards" key={dept._id}>
+              <div
+                className="department-cards"
+                key={dept._id}
+                onClick={() => router.push("/category")}
+              >
                 <div className="department-Image">
                   <img
                     src={`https://api.delcofarmersmarket.com${dept.image_2}`}

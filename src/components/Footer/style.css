@@ -69,7 +69,7 @@
   -webkit-box-pack: justify;
   justify-content: space-between;
   -webkit-box-align: center;
-  align-items: center;
+  align-items:flex-start;
   width: 100%;
   flex-wrap: wrap;
 }
