@@ -48,7 +48,7 @@ export default function Home() {
           <div className="more-product-container">
             <MoreProducts />
           </div>
-          <DepartmentCard/>
+          {/* <DepartmentCard/> */}
           <Footer />
         </div>
         <SideCart />

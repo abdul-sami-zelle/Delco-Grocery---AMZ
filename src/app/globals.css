@@ -8,25 +8,28 @@
 
 body {
   margin: 0;
-  background-color: #eaeded;
-    font-family: "Amazon Ember Modern", "Amazon Ember", sans-serif;
+  background-color: #F8F8F9;
+  font-family: "Amazon Ember Modern", "Amazon Ember", sans-serif;
   font-weight: 300;
 }
+
 :root {
   --white: #ffffff;
-  --peace: #ecb264;
+  --peace: #6a733a;
+  /* --peace: #3A5000; */
   --gray: #9ca7b5;
   --charcoal: #5b5d64;
   --border-color: #dfe3e9;
   --navy-blue: #3c4d5f;
   --light-gray: #f5f5f5;
   --text-color: #1f2c3a;
-  --black: #000000;
+  --black: #5b5d64;
   --text-gray: #64717e;
   --footer-color: #757575;
   --header-bg: #0000004d;
   --footer-last: #505050;
   --charcoal-text: #595959;
+  --white-gray: #F8F8F9;
 
   --light-green: #929a67;
   --light-medium-green: #6a733a;

@@ -9,16 +9,19 @@ import { LiaTruckMovingSolid } from "react-icons/lia";
 import "./Header.css";
 import { CartContext } from "../../context/addToCart";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { getLandingPageData } from "@/lib/api";
+import { getSalesProductData, getHeaderDepartments, getLandingPageData } from "@/lib/api";
 import LocationModal from "../LocationModal/LocationModal";
 import DeliveryModal from "../DeliveryModal/DeliveryModal";
 
-export default function Header() {
+export default function Header({ onDeptClick, onDiscountClick }) {
   const [showModal, setShowModal] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [showDelcoMenu, setShowDelcoMenu] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Delco Farmers");
   const [departments, setDepartments] = useState([]);
+  const [headerDepts, setHeaderDepts] = useState([]);
+  const [trendDepartments, setTrendDepartments] = useState([]);
+  const [discounts, setDiscounts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeModal, setActiveModal] = useState(null);
 
@@ -27,19 +30,6 @@ export default function Header() {
     "/assets/Images/2.jpg",
     "/assets/Images/3.jpg",
     "/assets/Images/4.jpg",
-  ];
-
-  const categories = [
-    "Produce",
-    "Dairy & Eggs",
-    "Meat & Seafood",
-    "Pantry",
-    "Beverages",
-    "Frozen",
-    "Snacks, Candy, Nuts, & Seeds",
-    "Baby",
-    "Beauty & Personal Care",
-    "Bulk Goods",
   ];
 
   const { showSideCart, setShowSideCart, cart } = useContext(CartContext);
@@ -100,7 +90,17 @@ export default function Header() {
     }
   }, [transition]);
 
+
+
   useEffect(() => {
+    async function fetchHeaderDepts() {
+      setLoading(true);
+      const data = await getHeaderDepartments();
+      if (data) {
+        setHeaderDepts(data);
+      }
+      setLoading(false);
+    }
     async function fetchData() {
       setLoading(true);
       const data = await getLandingPageData();
@@ -109,7 +109,17 @@ export default function Header() {
       }
       setLoading(false);
     }
+    async function getDicounts() {
+      setLoading(true);
+      const data = await getSalesProductData();
+      if (data?.data) {
+        setDiscounts(data?.data);
+      }
+      setLoading(false);
+    }
     fetchData();
+    getDicounts();
+    fetchHeaderDepts();
   }, []);
   return (
     <>
@@ -125,13 +135,18 @@ export default function Header() {
                   <HiMenuAlt1 />
                 </button>
               </div>
-              <div className="">
+              <a style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }} href="https://delcofarmersmarket.com">
                 <img
                   src="/assets/Images/header-logo.png"
                   className="header-logo"
-                  alt=""
+                  alt="Delco Farmers Market"
                 />
-              </div>
+              </a>
+
               <div className="search-container">
                 <span
                   className="delco-fresh-btn"
@@ -146,15 +161,15 @@ export default function Header() {
                 {showDelcoMenu && (
                   <div className="delco-menu">
                     <ul>
-                      {categories.map((item, i) => (
+                      {departments.map((item, i) => (
                         <li
                           key={i}
                           onClick={() => {
-                            setSelectedCategory(item);
+                            setSelectedCategory(item.name);
                             setShowDelcoMenu(false);
                           }}
                         >
-                          {item}
+                          {item.name}
                         </li>
                       ))}
                     </ul>
@@ -298,45 +313,78 @@ export default function Header() {
           </div>
 
           <span style={{ color: "lightgray", fontSize: "20px" }}>|</span>
+
+
+
+
           <div className="sub-header-left">
+
+            <div className="dropdown">
+              <a href="#">
+                Departments <MdKeyboardArrowDown size={13} />
+              </a>
+              <div className="dropdown-menu">
+                <div className="explore-container depts">
+                  <div className="" style={{ flex: 1 }}>
+                    <ul>
+                      {headerDepts && headerDepts?.map((dept) => (
+                        <li key={dept._id}>
+                          <a href={dept.url}><img style={{ width: "20px", height: "20px", marginRight: "10px" }} src={"https://api.delcofarmersmarket.com" + dept.image} alt="" srcset="" /> {dept.name}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  {/* <div className="" style={{ flex: 1 }}>
+                    <ul>
+                      <span>Trending</span>
+                      {trendDepartments.map((dept) => (
+                        <li key={dept._id} onClick={() => {
+                          onDeptClick(dept._id);   // parent ko inform karega
+                        }}>
+                          {dept.name}
+                        </li>
+                      ))}
+                    </ul>
+                  </div> */}
+                </div>
+              </div>
+            </div>
+
+
             <div className="dropdown">
               <a href="#">
                 Aisles <MdKeyboardArrowDown size={13} />
               </a>
               <div className="dropdown-menu">
-                <div className="explore-container">
-                  <div className="">
-                    <ul>
-                      <span>Groceries</span>
-                      {departments.map((dept) => (
-                        <li key={dept._id}>
-                          <img
-                            src={`https://api.delcofarmersmarket.com${dept.image_2}`}
-                            alt={dept.name}
-                            className="department-name-with-images"
-                          />
-                          {dept.name}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="">
-                    <ul>
-                      <span>Trending</span>
-                      {departments.map((dept) => (
-                        <li key={dept._id}>
-                          <img
-                            src={`https://api.delcofarmersmarket.com${dept.image_2}`}
-                            alt={dept.name}
-                            className="department-name-with-images"
-                          />
-                          {dept.name}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div
+                  className="explore-container"
+                  style={{
+                    display: departments.length < 11 ? "block" : "grid",
+                    gridTemplateColumns:
+                      departments.length < 11
+                        ? "none"
+                        : "repeat(auto-fill, minmax(200px, 1fr))", // grid only when 10+
+                    gap: departments.length < 11 ? "0" : "20px",
+                    maxHeight: "600px",
+                    overflowY: "auto",
+                    paddingRight: "10px",
+                  }}
+                >
+                  <ul>
+                    {departments.map((dept) => (
+                      <li key={dept._id}>
+                        <img
+                          src={`https://api.delcofarmersmarket.com${dept.image_2}`}
+                          alt={dept.name}
+                          className="department-name-with-images"
+                        />
+                        {dept.name}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
+
             </div>
 
             <div className="dropdown">
@@ -344,11 +392,16 @@ export default function Header() {
                 Discounts <MdKeyboardArrowDown size={13} />
               </a>
               <div className="dropdown-menu">
+
                 <ul>
-                  <li>Featured Savings</li>
-                  <li>Markdown</li>
-                  <li>All Savings</li>
+                  {Array.isArray(discounts) &&
+                    discounts.map((dis) => (
+                      <li key={dis._id} onClick={() => onDiscountClick(dis.sec_name)}>
+                        {dis.sec_name}
+                      </li>
+                    ))}
                 </ul>
+
               </div>
             </div>
 
@@ -379,10 +432,11 @@ export default function Header() {
               </div>
             </div>
 
-            <a href="#">Black Friday</a>
             <span style={{ color: "lightgray", fontSize: "20px" }}>|</span>
-            <a href="#">Past Purchases</a>
-            <a href="#">Repeat Items</a>
+            <a href="#">Black Friday</a>
+
+            {/* <a href="#">Past Purchases</a> */}
+            {/* <a href="#">Repeat Items</a> */}
           </div>
 
           <div className="sub-header-right">
@@ -411,7 +465,7 @@ export default function Header() {
             <div className="location">
               Delivery to:{" "}
               <span>
-                Council Bluffs, United States{" "}
+                Council Bluffs, PA{" "}
                 <span className="down-icon">
                   <MdKeyboardArrowDown />
                 </span>

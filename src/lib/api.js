@@ -105,3 +105,24 @@ export async function getDepartments(parent = 1, sortOrder = "asc") {
     return [];
   }
 }
+
+
+
+export async function getHeaderDepartments() {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/api/dept-header/get-all`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch departments");
+    const data = await res.json();
+    return data?.data || [];
+  } catch (err) {
+    console.error("API Error (departments):", err);
+    return [];
+  }
+}
